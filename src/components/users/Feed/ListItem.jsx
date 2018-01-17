@@ -1,24 +1,27 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import styled from "styled-components"
+import { withStyles } from "material-ui/styles"
 import {
   ListItem,
   Avatar as BaseAvatar
 } from "material-ui"
 
-const Avatar = styled(BaseAvatar)`
-  width: 50px !important;
-  height: 50px !important;
-  display: inline-block;
-`
+const Avatar = withStyles({
+  root: {
+    width: "50px",
+    height: "50px",
+    display: "inline-block"
+  }
+})(BaseAvatar)
 
-export default function FeedItem({ id, avatar, title, name, ...props }) {
+export default function FeedItem({ id, avatar, title, name, onSelect }) {
   return (
-    <ListItem key="user">
-      <Link to={`/u/${id}`}>
-        {avatar && <Avatar src={avatar.url} alt={name} />}
-        {title} {name}
-      </Link>
+    <ListItem
+      button
+      key="user"
+      onClick={() => onSelect(id)}>
+      {avatar && <Avatar src={avatar.url} alt={name} />}
+      {title} {name}
     </ListItem>
   )
 }

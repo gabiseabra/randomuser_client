@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { compose } from "redux"
 import { connect } from "react-redux"
+import { push } from "react-router-redux"
 import { withRouter } from "react-router-dom"
 import { Feed } from "../../components/users"
 import { load } from "../../redux/modules/users/feed"
@@ -20,9 +21,11 @@ class FeedApp extends Component {
     this.props.load(1)
   }
 
+  onSelect = id => this.props.push(`/u/${id}`)
+
   render() {
     const { users } = this.props
-    return (users ? <Feed users={users} /> : null)
+    return (users ? <Feed users={users} onSelect={this.onSelect} /> : null)
   }
 }
 
@@ -31,6 +34,6 @@ const props = (state, { }) => ({
 })
 
 export default compose(
-  connect(props, { load }),
+  connect(props, { push, load }),
   withRouter
 )(FeedApp)
