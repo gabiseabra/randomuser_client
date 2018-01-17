@@ -3,7 +3,7 @@ export default class ApiResponse {
     if(headers.has("X-Pagination")) {
       this.pagination = JSON.parse(headers.get("X-Pagination"))
     }
-    this.json = json
+    this.data = json
   }
 
   static async create(response) {

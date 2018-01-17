@@ -9,7 +9,7 @@ export default function create({ apiClient }) {
   function * request({ id }) {
     put(actions.request(id))
     try {
-      const data = yield call(apiClient.get, id)
+      const { data } = yield call(apiClient.get, id)
       yield put(actions.failure(id, data))
     } catch(error) {
       yield put(actions.failure(id, error))
