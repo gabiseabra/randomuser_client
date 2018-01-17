@@ -27,7 +27,7 @@ export default function create({ apiClient }) {
 
   return function * root() {
     yield all([
-			takeEvery(actions.LOAD, load)
-		])
+      takeEvery(actions.LOAD, load)
+    ])
   }
 }
