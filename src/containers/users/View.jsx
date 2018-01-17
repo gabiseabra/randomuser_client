@@ -16,7 +16,7 @@ class ViewApp extends Component {
   render() {
     const { user } = this.props
 
-    return (user ? <ViewApp user={user} /> : null)
+    return (user ? <View user={user} /> : null)
   }
 }
 
