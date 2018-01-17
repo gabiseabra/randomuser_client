@@ -26,7 +26,7 @@ export default function create({ apiClient }) {
     const loading = yield select(isPageLoading, props)
     const data = yield select(getPageData, props)
 
-    if(!loading && !data) yield fork(request(props))
+    if(!loading && !data) yield fork(request, props)
   }
 
   return function * root() {

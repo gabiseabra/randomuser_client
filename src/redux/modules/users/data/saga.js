@@ -21,7 +21,7 @@ export default function create({ apiClient }) {
     const data = yield select(getUserData, props)
 
     if(!loading && !data) {
-      yield fork(request(props))
+      yield fork(request, props)
     }
   }
 
