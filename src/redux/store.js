@@ -8,12 +8,9 @@ export default function create() {
 		sagaMiddleware
 	]
 	const finalCreateStore = compose(applyMiddleware(...middleware))(createStore)
-	const store = finalCreateStore(reducer, state)
+	const store = finalCreateStore(reducer)
 	store.runSaga = sagaMiddleware.run
 	store.close = (() => store.dispatch(END))
-	if(state) {
-		store.dispatch(hydrate(state))
-	}
 	if(process.env.HMR && module.hot) {
 		module.hot.accept("./reducer", () => {
 			store.replaceReducer(reducer)
