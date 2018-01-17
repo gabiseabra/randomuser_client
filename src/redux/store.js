@@ -25,11 +25,5 @@ export default function create({ history }) {
   store.runSaga = middleware.saga.run
   store.close = () => store.dispatch(END)
 
-  if(process.env.HMR && module.hot) {
-    module.hot.accept("./reducer", () => {
-      store.replaceReducer(reducer)
-    })
-  }
-
   return store
 }
