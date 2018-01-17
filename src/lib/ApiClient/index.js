@@ -16,7 +16,7 @@ export default class ApiClient {
     const response = await window.fetch(url, ...props)
     if(!response.ok) {
       let message = await response.text()
-      const status = `${response.status} ${response.statusMessage}`
+      const status = `${response.status} ${response.statusText}`
       if(message) message = `[${status}] ${message}`
       else message = status
       throw new Error(message)
