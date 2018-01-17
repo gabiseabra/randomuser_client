@@ -12,7 +12,7 @@ const API_URL = process.env.REACT_APP_API_URL || "/api"
 
 const root = document.getElementById("root")
 
-const apiClient = new ApiClient()
+const apiClient = new ApiClient(API_URL)
 
 const history = createHistory({ basename: PUBLIC_PATH })
 
