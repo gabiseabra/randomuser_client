@@ -22,7 +22,6 @@ class FeedApp extends Component {
 
   render() {
     const { users } = this.props
-
     return (users ? <Feed users={users} /> : null)
   }
 }

@@ -7,17 +7,17 @@ import {
 } from "material-ui"
 
 const Avatar = styled(BaseAvatar)`
-  width: 50px;
-  height: 50px;
+  width: 50px !important;
+  height: 50px !important;
   display: inline-block;
 `
 
-export default function FeedItem({ avatar, title, name }) {
+export default function FeedItem({ id, avatar, title, name, ...props }) {
   return (
     <ListItem>
-      <Link to={`/u/${user.id}`}>
-        <Avatar src={avatar.url} alt={user.name} />
-        {user.title} {user.name}
+      <Link to={`/u/${id}`}>
+        {avatar && <Avatar src={avatar.url} alt={name} />}
+        {title} {name}
       </Link>
     </ListItem>
   )
