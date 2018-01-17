@@ -12,18 +12,19 @@ const API_URL = process.env.REACT_APP_API_URL || "/api"
 
 const root = document.getElementById("root")
 
-const apiClient = new ApiClient(API_URL)
+const context = {
+  apiClient: new ApiClient(API_URL),
+  history: createHistory({ basename: PUBLIC_PATH })
+}
 
-const history = createHistory({ basename: PUBLIC_PATH })
+const saga = createSaga(context)
 
-const saga = createSaga({ apiClient })
-
-const store = createStore()
+const store = createStore(context)
 
 store.runSaga(saga)
 
 ReactDOM.render(
-  <Provider store={store} history={history}>
+  <Provider store={store} history={context.history}>
     <App />
   </Provider>,
   root
