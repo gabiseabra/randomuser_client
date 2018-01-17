@@ -1,11 +1,13 @@
 import React from "react"
 import { Switch, Route } from "react-router-dom"
-import { View } from "../users"
+import { Shell, View } from "../views"
 
 export default function App() {
   return (
-    <Switch>
-      <Route exact path="/u/:id" component={View} />
-    </Switch>
+    <Shell>
+      <Switch>
+        <Route exact path="/u/:id" component={View} />
+      </Switch>
+    </Shell>
   )
 }
