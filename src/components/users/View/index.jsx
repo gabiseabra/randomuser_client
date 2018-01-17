@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { withStyles } from "material-ui/styles"
 import {
   Table,
   TableBody,
@@ -9,38 +10,47 @@ import {
   Avatar as BaseAvatar
 } from "material-ui"
 
-const Avatar = styled(BaseAvatar)`
-  width: 200px;
-  height: 200px;
-  margin: 0 auto;
-`
+const Avatar = withStyles({
+  root: {
+    width: "200px",
+    height: "200px",
+    margin: "15px auto"
+  }
+})(BaseAvatar)
+
+const Title = withStyles({
+  root: {
+    fontSize: "1.5em",
+    margin: "20px auto"
+  }
+})(Typography)
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: space-between;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   height: 100%;
 `
 
 export default function View({ user }) {
   return (
     <Container>
-      <Avatar src={`/api/${user.avatar.url}`} alt={user.name}/>
-      <Typography type="title">{user.name}</Typography>
+      <Avatar src={user.avatar.url} alt={user.name}/>
+      <Title type="title" align="center">{user.name}</Title>
       <Table>
         <TableBody>
           <TableRow>
             <TableCell>Email</TableCell>
-            <TableCell>${user.email}</TableCell>
+            <TableCell>{user.email}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Phone</TableCell>
-            <TableCell>${user.phone}</TableCell>
+            <TableCell>{user.phone}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Cel</TableCell>
-            <TableCell>${user.cel}</TableCell>
+            <TableCell>{user.cel}</TableCell>
           </TableRow>
         </TableBody>
       </Table>

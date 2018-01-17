@@ -14,7 +14,7 @@ const Avatar = styled(BaseAvatar)`
 
 export default function FeedItem({ id, avatar, title, name, ...props }) {
   return (
-    <ListItem>
+    <ListItem key="user">
       <Link to={`/u/${id}`}>
         {avatar && <Avatar src={avatar.url} alt={name} />}
         {title} {name}
