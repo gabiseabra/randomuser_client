@@ -10,28 +10,31 @@ export default function create({ apiClient }) {
   function * request({ page, search }) {
     put(actions.request(page, search))
     try {
-      const { data, pagination } = yield call(apiClient.search, { page, q: search })
-      yield put(actions.failure(page, data, pagination))
+      const q = typeof search === "undefined" ? (yield select(getSearch)) : search
+      const { data, pagination } = yield call(apiClient.search, { page, q })
+      yield put(actions.success(page, data, pagination))
     } catch(error) {
       yield put(actions.failure(page, error))
     }
   }
 
   function * load(props) {
-    const search = yield select(getSearch, props)
-
-    // reset pagination when search changes
-    if(search !== props.search) yield put(actions.clear())
-
     const loading = yield select(isPageLoading, props)
     const data = yield select(getPageData, props)
 
     if(!loading && !data) yield fork(request, props)
   }
 
+  function * search(props) {
+    const search = yield select(getSearch)
+    // reset pagination when search changes
+    if(search !== props.search) yield put(actions.clear())
+  }
+
   return function * root() {
     yield all([
-      takeEvery(actions.LOAD, load)
+      takeEvery(actions.LOAD, load),
+      takeEvery(actions.SEARCH, search)
     ])
   }
 }

@@ -1,3 +1,5 @@
+import { SUCCESS as FEED_SUCCESS } from "../feed"
+
 export const LOAD = "users/data/LOAD"
 export const REQUEST = "users/data/REQUEST"
 export const SUCCESS = "users/data/SUCCESS"
@@ -40,6 +42,8 @@ export default function userListReducer(state = {}, action) {
     case SUCCESS:
     case FAILURE:
       return userReducer.delegate(state, action)
+    case FEED_SUCCESS:
+      return action.data.reduce((list, user) => ({ [user.id]: user, ...list }), state)
     default:
       return state
   }

@@ -1,12 +1,12 @@
-import { keyBy } from "lodash"
-
 export const LOAD = "users/feed/LOAD"
+export const SEARCH = "users/feed/SEARCH"
 export const REQUEST = "users/feed/REQUEST"
 export const SUCCESS = "users/feed/SUCCESS"
 export const FAILURE = "users/feed/FAILURE"
 export const CLEAR = "users/feed/CLEAR"
 
-export const load = (page = 1, search = "") => ({ type: LOAD, page, search })
+export const load = (page = 1) => ({ type: LOAD, page })
+export const search = (search = "") => ({ type: LOAD, search })
 export const request = (page, search) => ({ type: REQUEST, page, search })
 export const success = (page, data, pagination) => ({ type: SUCCESS, page, data, pagination })
 export const failure = (page, error) => ({ type: FAILURE, page, error })
@@ -29,7 +29,7 @@ function pageReducer(state = {}, action) {
     case SUCCESS:
       return {
         loading: false,
-        data: keyBy(action.data, "id")
+        data: action.data.map(({ id }) => id)
       }
     case FAILURE:
       return {
@@ -52,7 +52,11 @@ export default function feedReducer(state = initialState, action) {
     case REQUEST:
       return {
         ...pageReducer.delegate(state, action),
-        search: action.search
+        search: action.search,
+        pagination: {
+          ...state.pagination,
+          current_page: action.page
+        }
       }
     case SUCCESS:
       return {
