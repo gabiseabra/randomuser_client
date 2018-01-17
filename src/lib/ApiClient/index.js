@@ -1,3 +1,5 @@
+import { buildResponse } from "./Response"
+
 export default class ApiClient {
   constructor(url) {
     this.url = url
@@ -13,11 +15,11 @@ export default class ApiClient {
       else message = status
       throw new Error(message)
     }
-    return response.json()
+    return buildResponse(response)
   }
 
   search() {
-    return this.fetch(`/`)    
+    return this.fetch(`/`)
   }
 
   get(id) {
