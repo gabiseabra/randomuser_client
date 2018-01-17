@@ -8,7 +8,7 @@ export const request = (id) => ({ type: REQUEST, id })
 export const success = (id, data) => ({ type: SUCCESS, id, data })
 export const failure = (id, error) => ({ type: FAILURE, id, error })
 
-function user(state = {}, action) {
+function userReducer(state = {}, action) {
   switch(action.type) {
     case REQUEST:
       return {
@@ -24,12 +24,23 @@ function user(state = {}, action) {
         loading: false,
         error: action.error
       }
+    default:
+      return state
   }
 }
 
-export default function users(state = {}, action) {
-  return {
-    ...state,
-    [action.id]: user(state[action.id], action)
+userReducer.delegate = (state, action) => ({
+  ...state,
+  [action.id]: userReducer(state[action.id], action)
+})
+
+export default function userListReducer(state = {}, action) {
+  switch(action.type) {
+    case REQUEST:
+    case SUCCESS:
+    case FAILURE:
+      return userReducer.delegate(state, action)
+    default:
+      return state
   }
 }
