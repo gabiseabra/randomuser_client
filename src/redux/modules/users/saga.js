@@ -1,4 +1,4 @@
-import { put, fork, call, select, all, takeEvery } from "redux-saga"
+import { put, fork, call, select, all, takeEvery } from "redux-saga/effects"
 import * as actions from "./index"
 import {
   isUserLoading,
@@ -27,7 +27,7 @@ export default function create({ apiClient }) {
 
   return function * root() {
     yield all([
-			takeLatest(actions.LOAD, load)
+			takeEvery(actions.LOAD, load)
 		])
   }
 }
