@@ -1,2 +1,3 @@
 export { Shell } from "../../components/views"
-export { View } from "../users"
+export { View as User } from "../users"
+export { default as Home } from "./Home"
