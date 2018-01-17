@@ -6,7 +6,7 @@ import { getUserData } from "../../redux/modules/users/data/selectors"
 
 class ViewApp extends Component {
   componentWillMount() {
-    const { id } = this.props
+    const { match: { params: { id } } } = this.props
     this.props.load(id)
   }
 
@@ -17,8 +17,8 @@ class ViewApp extends Component {
   }
 }
 
-const props = (state, props) => ({
-  user: getUserData(state, props)
+const props = (state, { match: { params }}) => ({
+  user: getUserData(state, params)
 })
 
 export default connect(props, { load })(ViewApp)

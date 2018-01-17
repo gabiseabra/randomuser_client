@@ -5,7 +5,7 @@ import { View } from "../users"
 export default function App() {
   return (
     <Switch>
-      <Route exact match="/u/:id" component={View} />
+      <Route exact path="/u/:id" component={View} />
     </Switch>
   )
 }

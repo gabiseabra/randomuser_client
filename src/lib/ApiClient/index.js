@@ -21,19 +21,19 @@ export default class ApiClient {
       else message = status
       throw new Error(message)
     }
-    return buildResponse(response)
+    return await buildResponse(response)
   }
 
   search() {
-    return this.fetch(`/`)
+    return this.fetch(`/user`)
   }
 
   get(id) {
-    return this.fetch(`/${id}`)
+    return this.fetch(`/user/${id}`)
   }
 
   create(body) {
-    return this.fetch("/", {
+    return this.fetch("/user", {
       method: "POST",
       body: JSON.stringify(body)
     })

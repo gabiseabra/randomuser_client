@@ -6,8 +6,8 @@ export default class ApiResponse {
     this.data = json
   }
 
-  static async create(response) {
-    new ApiResponse(
+  static async build(response) {
+    return new ApiResponse(
       await response.json(),
       response.headers
     )
