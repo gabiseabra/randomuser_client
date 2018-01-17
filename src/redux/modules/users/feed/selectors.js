@@ -24,5 +24,5 @@ export const getPageError = createSelector(getPage, page => page.error)
 export const getPageUsers = createSelector(
   getAllUsers,
   getPageData,
-  (users, ids) => ids ? ids.map(id => users[id]) : []
+  (users, ids) => ids ? ids.map(id => users[id].data) : []
 )

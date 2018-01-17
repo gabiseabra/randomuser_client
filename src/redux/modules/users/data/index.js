@@ -43,7 +43,7 @@ export default function userListReducer(state = {}, action) {
     case FAILURE:
       return userReducer.delegate(state, action)
     case FEED_SUCCESS:
-      return action.data.reduce((list, user) => ({ [user.id]: user, ...list }), state)
+      return action.data.reduce((list, user) => ({ [user.id]: { data: user }, ...list }), state)
     default:
       return state
   }
