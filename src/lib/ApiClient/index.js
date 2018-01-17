@@ -1,13 +1,19 @@
+import "whatwg-fetch"
 import { buildResponse } from "./Response"
 
 export default class ApiClient {
+  static METHODS = ["fetch", "search", "get", "create"]
+
   constructor(url) {
     this.url = url
+    ApiClient.METHODS.forEach((method) => {
+      this[method] = this[method].bind(this)
+    }, this)
   }
 
   async fetch(path, ...props) {
-    const url = `${this.url}/${path}`
-    const response = await fetch(url, ...props)
+    const url = `${this.url}${path}`
+    const response = await window.fetch(url, ...props)
     if(!response.ok) {
       let message = await response.text()
       const status = `${response.status} ${response.statusMessage}`
