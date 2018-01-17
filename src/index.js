@@ -5,7 +5,7 @@ import ApiClient from "./lib/ApiClient"
 import createStore from "./redux/store"
 import createSaga from "./redux/saga"
 import { App, Provider } from "./containers/app"
-import "./index.css"
+import "./styles/index.css"
 
 const PUBLIC_PATH = process.env.REACT_APP_PUBLIC_PATH || "/"
 const API_URL = process.env.REACT_APP_API_URL || "/api"
