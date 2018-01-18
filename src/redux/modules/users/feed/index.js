@@ -37,6 +37,8 @@ function pageReducer(state = {}, action) {
         loading: false,
         error: action.error
       }
+    default:
+      return state
   }
 }
 

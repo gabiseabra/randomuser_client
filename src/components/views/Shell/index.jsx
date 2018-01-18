@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import { AppBar, Toolbar, Typography } from "material-ui"
 import Header from "./Header"
 
 const Container = styled.div`

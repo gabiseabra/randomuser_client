@@ -6,7 +6,6 @@ import { push } from "react-router-redux"
 import { withRouter } from "react-router-dom"
 import parseQuery from "../../lib/parseQuery"
 import { Search } from "../../components/users"
-import { getSearch } from "../../redux/modules/users/feed/selectors"
 
 class SearchApp extends Component {
   onSubmit = ({ search: q, results }) => {

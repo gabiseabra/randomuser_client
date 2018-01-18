@@ -9,7 +9,6 @@ import {
   getPageUsers,
   getCurrentPage
 } from "../../redux/modules/users/feed/selectors"
-import Pagination from "./Pagination"
 
 class FeedApp extends Component {
   componentDidMount() {
