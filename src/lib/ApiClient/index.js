@@ -1,4 +1,5 @@
 import "whatwg-fetch"
+import qs from "querystring"
 import { buildResponse } from "./Response"
 
 export default class ApiClient {
@@ -28,8 +29,8 @@ export default class ApiClient {
     return await buildResponse(await this.fetch(...props))
   }
 
-  search() {
-    return this.json(`/user`)
+  search(query) {
+    return this.json(`/user?${qs.stringify(query)}`)
   }
 
   get(id) {
