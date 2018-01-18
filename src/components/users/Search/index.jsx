@@ -3,7 +3,8 @@ import styled from "styled-components"
 import { Button, TextField } from "material-ui"
 import SearchIcon from "material-ui-icons/Search"
 import Results from "./Results"
-const Container = styled.div`
+
+const Container = styled.form`
   flex: 1;
   display: flex;
   align-items: flex-end;
@@ -33,7 +34,10 @@ export default class Search extends Component {
 
   onChange = ({ target }) => this.setState({ [target.name]: target.value })
 
-  onSubmit = () => this.props.onSubmit(this.state)
+  onSubmit = (e) => {
+    this.props.onSubmit(this.state)
+    if(e) e.preventDefault()
+  }
 
   onChangeSubmit = async (e) => {
     await this.onChange(e)
@@ -44,7 +48,7 @@ export default class Search extends Component {
     const { search, results } = this.state
 
     return (
-      <Container>
+      <Container onSubmit={this.onSubmit}>
         <TextField
           fullWidth
           type="text"
@@ -55,7 +59,7 @@ export default class Search extends Component {
           name="results"
           value={results}
           onChange={this.onChangeSubmit} />
-        <Button fab mini onClick={this.onSubmit}>
+        <Button fab mini type="submit">
           <SearchIcon />
         </Button>
       </Container>

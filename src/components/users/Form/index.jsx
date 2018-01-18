@@ -30,9 +30,10 @@ export default class Form extends Component {
     if(!next.disabled && next.disabled !== this.props.disabled) this.randomize()
   }
 
-  onSubmit = () => {
+  onSubmit = (e) => {
     const { disabled, onSubmit } = this.props
     if(!disabled) onSubmit(this.state)
+    if(e) e.preventDefault()
   }
 
   onChange = e => this.setState({ [e.target.name]: e.target.value })
@@ -44,32 +45,34 @@ export default class Form extends Component {
     const { count, seed } = this.state
 
     return (
-      <Container elevation={12}>
-        <TextField
-          type="text"
-          label="Seed"
-          name="seed"
-          value={seed}
-          onChange={this.onChange} />
-        <IconButton
-          color="primary"
-          onClick={this.randomize}>
-          <RefreshIcon />
-        </IconButton>
-        <TextField
-          type="number"
-          label="Amount"
-          name="count"
-          value={count}
-          onChange={this.onChange} />
-        <Button
-          raised
-          color="primary"
-          disabled={disabled}
-          onClick={this.onSubmit}>
-          Insert Users
-        </Button>
-      </Container>
+      <form onSubmit={this.onSubmit}>
+        <Container elevation={12}>
+          <TextField
+            type="text"
+            label="Seed"
+            name="seed"
+            value={seed}
+            onChange={this.onChange} />
+          <IconButton
+            color="primary"
+            onClick={this.randomize}>
+            <RefreshIcon />
+          </IconButton>
+          <TextField
+            type="number"
+            label="Amount"
+            name="count"
+            value={count}
+            onChange={this.onChange} />
+          <Button
+            raised
+            color="primary"
+            type="submit"
+            disabled={disabled}>
+            Insert Users
+          </Button>
+        </Container>
+      </form>
     )
   }
 }
