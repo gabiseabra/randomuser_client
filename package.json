@@ -1,16 +1,21 @@
 {
-  "name": "client",
+  "name": "randomuser_client",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "serve -s build",
+    "serve:app": "node server.js",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "yarn run build:server && yarn run build:client",
+    "build:client": "react-scripts build",
+    "build:server": "babel src/server.js -o server.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "express": "^4.16.2",
     "history": "^4.7.2",
+    "http-proxy-middleware": "^0.17.4",
     "lodash": "^4.17.4",
     "material-ui": "^1.0.0-beta.29",
     "material-ui-icons": "^1.0.0-beta.17",
@@ -24,11 +29,15 @@
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
     "reselect": "^3.0.1",
+    "serve": "^6.4.8",
+    "serve-favicon": "^2.4.5",
     "styled-components": "^2.4.0",
-    "whatwg-fetch": "^2.0.3",
-    "serve": "^6.4.8"
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-1": "^6.24.1",
     "redux-logger": "^3.0.6"
   }
 }

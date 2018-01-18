@@ -7,8 +7,8 @@ import createSaga from "./redux/saga"
 import { App, Provider } from "./containers/app"
 import "./styles/index.css"
 
-const PUBLIC_PATH = process.env.REACT_APP_PUBLIC_PATH || "/"
-const API_URL = process.env.REACT_APP_API_URL || "/api"
+const PUBLIC_PATH = process.env.PUBLIC_PATH || "/"
+const API_URL = process.env.API_URL || "/api"
 
 const root = document.getElementById("root")
 
