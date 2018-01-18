@@ -18,10 +18,10 @@ const Main = styled.main`
   height: 100%;
 `
 
-export default function Shell({ children }) {
+export default function Shell({ children, search }) {
   return (
     <Container>
-      <Header />
+      <Header>{search}</Header>
       <Main>
         {children}
       </Main>

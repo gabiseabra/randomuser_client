@@ -1,21 +1,24 @@
 export const LOAD = "users/feed/LOAD"
 export const SEARCH = "users/feed/SEARCH"
+export const UPDATE = "users/feed/UPDATE"
 export const REQUEST = "users/feed/REQUEST"
 export const SUCCESS = "users/feed/SUCCESS"
 export const FAILURE = "users/feed/FAILURE"
-export const CLEAR = "users/feed/CLEAR"
 
 export const load = (page = 1) => ({ type: LOAD, page })
-export const search = (search = "") => ({ type: SEARCH, search })
-export const request = (page, search) => ({ type: REQUEST, page, search })
+export const search = (q, results = 15) => ({ type: SEARCH, search: { q, results } })
+export const update = (search) => ({ type: UPDATE, search })
+export const request = (page) => ({ type: REQUEST, page })
 export const success = (page, data, pagination) => ({ type: SUCCESS, page, data, pagination })
 export const failure = (page, error) => ({ type: FAILURE, page, error })
-export const clear = () => ({ type: CLEAR })
 
 const initialState = {
   loading: false,
   data: {},
-  search: "",
+  search: {
+    q: "",
+    results: 15
+  },
   pagination: {
     current_page: 1
   }
@@ -53,7 +56,6 @@ export default function feedReducer(state = initialState, action) {
     case REQUEST:
       return {
         ...pageReducer.delegate(state, action),
-        search: action.search,
         pagination: {
           ...state.pagination,
           current_page: action.page
@@ -66,8 +68,11 @@ export default function feedReducer(state = initialState, action) {
       }
     case FAILURE:
       return pageReducer.delegate(state, action)
-    case CLEAR:
-      return initialState
+    case UPDATE:
+      return {
+        ...initialState,
+        search: action.search || state.search
+      }
     default:
       return state
   }

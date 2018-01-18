@@ -2,7 +2,7 @@ import React from "react"
 import { AppBar, Toolbar, Typography } from "material-ui"
 import { GoBack } from "../../shared"
 
-export default function Header() {
+export default function Header({ children }) {
   return (
     <AppBar position="static" color="primary">
       <Toolbar>
@@ -12,6 +12,7 @@ export default function Header() {
         <Typography type="title" color="inherit">
           Random User App
         </Typography>
+        {children}
       </Toolbar>
     </AppBar>
   )
