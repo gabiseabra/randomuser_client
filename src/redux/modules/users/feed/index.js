@@ -13,6 +13,7 @@ export const failure = (page, error) => ({ type: FAILURE, page, error })
 export const clear = () => ({ type: CLEAR })
 
 const initialState = {
+  loading: false,
   data: {},
   search: "",
   pagination: {

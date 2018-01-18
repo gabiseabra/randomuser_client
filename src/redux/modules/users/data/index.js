@@ -1,13 +1,11 @@
 import { SUCCESS as FEED_SUCCESS } from "../feed"
 
 export const LOAD = "users/data/LOAD"
-export const CREATE = "users/data/CREATE"
 export const REQUEST = "users/data/REQUEST"
 export const SUCCESS = "users/data/SUCCESS"
 export const FAILURE = "users/data/FAILURE"
 
 export const load = (id) => ({ type: LOAD, id })
-export const create = (count, seed = "giga") => ({ type: CREATE, count, seed })
 export const request = (id) => ({ type: REQUEST, id })
 export const success = (id, data) => ({ type: SUCCESS, id, data })
 export const failure = (id, error) => ({ type: FAILURE, id, error })

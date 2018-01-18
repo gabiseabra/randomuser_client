@@ -1,5 +1,5 @@
 import { put, fork, call, select, all, takeEvery } from "redux-saga/effects"
-import { CREATE as CREATE_USER } from "../data"
+import { SUCCESS as FORM_SUCCESS } from "../form"
 import * as actions from "./index"
 import {
   isPageLoading,
@@ -40,7 +40,7 @@ export default function create({ apiClient }) {
     yield all([
       takeEvery(actions.LOAD, load),
       takeEvery(actions.SEARCH, search),
-      takeEvery(CREATE_USER, clear)
+      takeEvery(FORM_SUCCESS, clear)
     ])
   }
 }
