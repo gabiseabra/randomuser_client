@@ -21,15 +21,19 @@ export default class ApiClient {
       else message = status
       throw new Error(message)
     }
-    return await buildResponse(response)
+    return response
+  }
+
+  async json(...props) {
+    return await buildResponse(await this.fetch(...props))
   }
 
   search() {
-    return this.fetch(`/user`)
+    return this.json(`/user`)
   }
 
   get(id) {
-    return this.fetch(`/user/${id}`)
+    return this.json(`/user/${id}`)
   }
 
   create(body) {
