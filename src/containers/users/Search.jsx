@@ -4,16 +4,11 @@ import { compose } from "redux"
 import { connect } from "react-redux"
 import { push } from "react-router-redux"
 import { withRouter } from "react-router-dom"
+import parseQuery from "../../lib/parseQuery"
 import { Search } from "../../components/users"
-import { search } from "../../redux/modules/users/feed"
 import { getSearch } from "../../redux/modules/users/feed/selectors"
 
 class SearchApp extends Component {
-  componentWillMount() {
-    const { search, results } = this.query
-    this.props.search(search, results)
-  }
-
   onSubmit = ({ search, results }) => {
     this.props.push({
       pathname: "/",
@@ -23,17 +18,9 @@ class SearchApp extends Component {
         results
       })
     })
-    this.props.search(search, results)
   }
 
-  get query() {
-    const { location } = this.props
-    return (
-      location.search ?
-        qs.parse(location.search.slice(1)) :
-        {}
-    )
-  }
+  get query() { return parseQuery(this.props) }
 
   render() {
     return <Search onSubmit={this.onSubmit} initialValue={this.query}/>
@@ -41,6 +28,6 @@ class SearchApp extends Component {
 }
 
 export default compose(
-  connect(undefined, { search, push }),
+  connect(undefined, { push }),
   withRouter
 )(SearchApp)

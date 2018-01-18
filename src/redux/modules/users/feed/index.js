@@ -15,10 +15,7 @@ export const failure = (page, error) => ({ type: FAILURE, page, error })
 const initialState = {
   loading: false,
   data: {},
-  search: {
-    q: "",
-    results: 15
-  },
+  search: {},
   pagination: {
     current_page: 1
   }

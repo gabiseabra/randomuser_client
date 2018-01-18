@@ -1,5 +1,7 @@
-import { isEqual } from "lodash"
+import { isEqual, pick } from "lodash"
 import { put, fork, call, select, all, takeEvery, takeLatest } from "redux-saga/effects"
+import { LOCATION_CHANGE } from "react-router-redux"
+import parseQuery from "../../../../lib/parseQuery"
 import { SUCCESS as FORM_SUCCESS } from "../form"
 import * as actions from "./index"
 import {
@@ -7,6 +9,8 @@ import {
   getPageData,
   getSearch
 } from "./selectors"
+
+const pickSearch = _ => pick(_, [ "search", "results" ])
 
 export default function create({ apiClient }) {
   function * request({ page }) {
@@ -31,11 +35,21 @@ export default function create({ apiClient }) {
     if(!loading && !data) yield fork(request, props)
   }
 
+  // Reset pagination when search changes
   function * search(props) {
     const q = yield select(getSearch)
-    // reset pagination when search changes
     if(!isEqual(q, props.search)) {
       yield fork(clear, props)
+    }
+  }
+
+  // Update api search on LOCATION_CHANGE
+  function * locationChange({ payload }) {
+    const query = pickSearch(parseQuery({ location: payload }))
+    const storedQuery = yield select(getSearch)
+    console.log(query, storedQuery)
+    if(!isEqual(query, storedQuery)) {
+      yield fork(clear, query)
     }
   }
 
@@ -43,7 +57,8 @@ export default function create({ apiClient }) {
     yield all([
       takeEvery(actions.LOAD, load),
       takeLatest(actions.SEARCH, search),
-      takeEvery(FORM_SUCCESS, clear)
+      takeEvery(FORM_SUCCESS, clear),
+      takeEvery(LOCATION_CHANGE, locationChange)
     ])
   }
 }
