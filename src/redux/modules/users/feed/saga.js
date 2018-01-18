@@ -9,7 +9,7 @@ import {
 
 export default function create({ apiClient }) {
   function * request({ page, search }) {
-    put(actions.request(page, search))
+    yield put(actions.request(page, search))
     try {
       const q = typeof search === "undefined" ? (yield select(getSearch)) : search
       const { data, pagination } = yield call(apiClient.search, { page, q })

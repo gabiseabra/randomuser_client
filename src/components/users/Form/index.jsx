@@ -26,6 +26,10 @@ export default class Form extends Component {
     seed: rng()
   }
 
+  componentWillReceiveProps(next) {
+    if(!next.disabled && next.disabled !== this.props.disabled) this.randomize()
+  }
+
   onSubmit = () => {
     const { disabled, onSubmit } = this.props
     if(!disabled) onSubmit(this.state)

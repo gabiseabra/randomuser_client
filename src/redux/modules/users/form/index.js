@@ -8,8 +8,8 @@ export const request = () => ({ type: REQUEST })
 export const success = (/* data */) => ({ type: SUCCESS })
 export const failure = (error) => ({ type: FAILURE, error })
 
-export default function loadingReducer(state = true, action) {
-  switch(action) {
+export default function formReducer(state = {}, action) {
+  switch(action.type) {
     case REQUEST: return { loading: true }
     case SUCCESS: return { loading: false }
     case FAILURE: return { loading: false, error: action.error }

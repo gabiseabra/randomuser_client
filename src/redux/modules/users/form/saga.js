@@ -4,7 +4,7 @@ import { isFormLoading } from "./selectors"
 
 export default function create({ apiClient }) {
   function * request({ seed, count }) {
-    put(actions.request())
+    yield put(actions.request())
     try {
       yield call(apiClient.create, { seed, count })
       yield put(actions.success())

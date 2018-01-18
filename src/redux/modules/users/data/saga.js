@@ -7,7 +7,7 @@ import {
 
 export default function create({ apiClient }) {
   function * request({ id }) {
-    put(actions.request(id))
+    yield put(actions.request(id))
     try {
       const { data } = yield call(apiClient.get, id)
       yield put(actions.success(id, data))
