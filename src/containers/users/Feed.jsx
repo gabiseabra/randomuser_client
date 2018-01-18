@@ -13,7 +13,7 @@ class FeedApp extends Component {
   }
 
   componentWillReceiveProps(next) {
-    if(!next.users) this.load(next)
+    if(!next.users || !next.users.length) this.load(next)
   }
 
   load(props) {
