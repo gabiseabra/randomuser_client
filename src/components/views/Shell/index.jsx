@@ -13,6 +13,9 @@ const Container = styled.div`
 
 const Main = styled.main`
   flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `
 
 export default function Shell({ children }) {

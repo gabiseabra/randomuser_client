@@ -6,7 +6,7 @@ export const FAILURE = "users/feed/FAILURE"
 export const CLEAR = "users/feed/CLEAR"
 
 export const load = (page = 1) => ({ type: LOAD, page })
-export const search = (search = "") => ({ type: LOAD, search })
+export const search = (search = "") => ({ type: SEARCH, search })
 export const request = (page, search) => ({ type: REQUEST, page, search })
 export const success = (page, data, pagination) => ({ type: SUCCESS, page, data, pagination })
 export const failure = (page, error) => ({ type: FAILURE, page, error })

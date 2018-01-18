@@ -1,4 +1,5 @@
 import { put, fork, call, select, all, takeEvery } from "redux-saga/effects"
+import { CREATE as CREATE_USER } from "../data"
 import * as actions from "./index"
 import {
   isPageLoading,
@@ -18,6 +19,10 @@ export default function create({ apiClient }) {
     }
   }
 
+  function * clear() {
+    yield put(actions.clear())
+  }
+
   function * load(props) {
     const loading = yield select(isPageLoading, props)
     const data = yield select(getPageData, props)
@@ -28,13 +33,14 @@ export default function create({ apiClient }) {
   function * search(props) {
     const search = yield select(getSearch)
     // reset pagination when search changes
-    if(search !== props.search) yield put(actions.clear())
+    if(search !== props.search) yield fork(clear)
   }
 
   return function * root() {
     yield all([
       takeEvery(actions.LOAD, load),
-      takeEvery(actions.SEARCH, search)
+      takeEvery(actions.SEARCH, search),
+      takeEvery(CREATE_USER, clear)
     ])
   }
 }

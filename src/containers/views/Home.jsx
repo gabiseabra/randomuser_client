@@ -1,11 +1,11 @@
-import React from "react"
-import { Feed } from "../users"
+import React, { Fragment } from "react"
+import { Feed, Form } from "../users"
 
 export default function HomePage() {
   return (
-    <div>
+    <Fragment>
       <Feed />
-      {/* <Form /> */}
-    </div>
+      <Form />
+    </Fragment>
   )
 }
