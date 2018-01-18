@@ -4,7 +4,7 @@ import Express from "express"
 import favicon from "serve-favicon"
 import proxy from "http-proxy-middleware"
 
-const PORT = process.env.PORT || 80
+const PORT = process.env.PROXY_PORT || 80
 const API_URL = process.env.API_URL || "/api"
 const BUILD_DIR = process.env.BUILD_DIR || path.join(__dirname, "build")
 
