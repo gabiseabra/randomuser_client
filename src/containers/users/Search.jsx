@@ -9,12 +9,12 @@ import { Search } from "../../components/users"
 import { getSearch } from "../../redux/modules/users/feed/selectors"
 
 class SearchApp extends Component {
-  onSubmit = ({ search, results }) => {
+  onSubmit = ({ search: q, results }) => {
     this.props.push({
       pathname: "/",
       search: qs.stringify({
         ...this.query,
-        search,
+        q,
         results
       })
     })

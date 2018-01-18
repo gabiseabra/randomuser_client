@@ -10,7 +10,7 @@ import {
   getSearch
 } from "./selectors"
 
-const pickSearch = _ => pick(_, [ "search", "results" ])
+const pickSearch = _ => pick(_, [ "q", "results" ])
 
 export default function create({ apiClient }) {
   function * request({ page }) {
@@ -47,9 +47,8 @@ export default function create({ apiClient }) {
   function * locationChange({ payload }) {
     const query = pickSearch(parseQuery({ location: payload }))
     const storedQuery = yield select(getSearch)
-    console.log(query, storedQuery)
     if(!isEqual(query, storedQuery)) {
-      yield fork(clear, query)
+      yield fork(clear, { search: query })
     }
   }
 

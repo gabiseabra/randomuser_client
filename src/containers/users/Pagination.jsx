@@ -4,6 +4,7 @@ import { compose } from "redux"
 import { connect } from "react-redux"
 import { push } from "react-router-redux"
 import { withRouter } from "react-router-dom"
+import parseQuery from "../../lib/parseQuery"
 import { Pagination } from "../../components/shared"
 import { load } from "../../redux/modules/users/feed"
 import { getPagination } from "../../redux/modules/users/feed/selectors"
@@ -20,14 +21,7 @@ class PaginationApp extends Component {
     this.props.load(page)
   }
 
-  get query() {
-    const { location } = this.props
-    return (
-      location.search ?
-        qs.parse(location.search.slice(1)) :
-        {}
-    )
-  }
+  get query() { parseQuery(this.props) }
 
   render() {
     const { pagination } = this.props
