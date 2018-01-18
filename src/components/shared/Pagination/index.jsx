@@ -34,14 +34,22 @@ export default function Pagination({
   const current = parseInt(props.current_page, 10)
   return (
     <Container>
-      <Button fab mini disabled={current <= 1} onClick={() => onSubmit(current - 1)}>
+      <Button
+        fab
+        mini
+        disabled={current <= 1}
+        onClick={() => onSubmit(current - 1)}>
         <PreviousIcon />
       </Button>
       <Text align="right">
         {current} / {pages}
         <Results>(showing {perPage} of {entries})</Results>
       </Text>
-      <Button fab mini onClick={() => onSubmit(current + 1)}>
+      <Button
+        fab
+        mini
+        disabled={current >= pages}
+        onClick={() => onSubmit(current + 1)}>
         <NextIcon />
       </Button>
     </Container>
