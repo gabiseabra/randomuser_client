@@ -5,6 +5,8 @@ import SearchIcon from "material-ui-icons/Search"
 import Results from "./Results"
 const Container = styled.div`
   margin-left: auto;
+  display: flex;
+  align-items: flex-end;
 
   > button {
     margin: 0 15px;

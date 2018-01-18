@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom"
 import { Feed } from "../../components/users"
 import { load } from "../../redux/modules/users/feed"
 import { getPageUsers } from "../../redux/modules/users/feed/selectors"
+import Pagination from "./Pagination"
 
 class FeedApp extends Component {
   componentDidMount() {
@@ -24,8 +25,8 @@ class FeedApp extends Component {
   onSelect = id => this.props.push(`/u/${id}`)
 
   render() {
-    const { users } = this.props
-    return (users ? <Feed users={users} onSelect={this.onSelect} /> : null)
+    const props = this.props
+    return (props.users ? <Feed {...props} onSelect={this.onSelect} /> : null)
   }
 }
 

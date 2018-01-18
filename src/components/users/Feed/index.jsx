@@ -1,19 +1,19 @@
 import React from "react"
-import { Link } from "react-router-dom"
-import { withStyles } from "material-ui/styles"
-import { List as BaseList } from "material-ui"
+import styled from "styled-components"
+import { List } from "material-ui"
 import ListItem from "./ListItem"
 
-const List = withStyles({
-  root: {
-    overflowY: "auto"
-  }
-})(BaseList)
+const Container = styled.div`
+  overflow-y: auto;
+`
 
-export default function Feed({ users, onSelect }) {
+export default function Feed({ users, pagination, onSelect }) {
   return (
-    <List>
-      {users.map(user => <ListItem key={user.id} onSelect={onSelect} {...user} />)}
-    </List>
+    <Container>
+      <List>
+        {users.map(user => <ListItem key={user.id} onSelect={onSelect} {...user} />)}
+      </List>
+      {pagination}
+    </Container>
   )
 }
