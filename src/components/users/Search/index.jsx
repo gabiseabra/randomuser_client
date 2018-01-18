@@ -4,11 +4,13 @@ import { Button, TextField } from "material-ui"
 import SearchIcon from "material-ui-icons/Search"
 import Results from "./Results"
 const Container = styled.div`
-  margin-left: auto;
+  flex: 1;
   display: flex;
   align-items: flex-end;
+  margin-left: 30px;
 
   > button {
+    flex: 0 0 auto;
     margin: 0 15px;
   }
 `
@@ -44,6 +46,7 @@ export default class Search extends Component {
     return (
       <Container>
         <TextField
+          fullWidth
           type="text"
           name="search"
           value={search}
