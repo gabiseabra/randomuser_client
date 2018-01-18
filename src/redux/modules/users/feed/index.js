@@ -53,21 +53,22 @@ pageReducer.delegate = (state, action) => ({
 
 export default function feedReducer(state = initialState, action) {
   switch(action.type) {
-    case REQUEST:
+    case LOAD:
       return {
-        ...pageReducer.delegate(state, action),
+        ...state,
         pagination: {
           ...state.pagination,
           current_page: action.page
         }
       }
+    case REQUEST:
+    case FAILURE:
+      return pageReducer.delegate(state, action)
     case SUCCESS:
       return {
         ...pageReducer.delegate(state, action),
         pagination: action.pagination
       }
-    case FAILURE:
-      return pageReducer.delegate(state, action)
     case UPDATE:
       return {
         ...initialState,

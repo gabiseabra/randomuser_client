@@ -34,7 +34,7 @@ export default function Pagination({
   const current = parseInt(props.current_page, 10)
   return (
     <Container>
-      <Button fab mini disabled={current <= 0} onClick={() => onSubmit(current - 1)}>
+      <Button fab mini disabled={current <= 1} onClick={() => onSubmit(current - 1)}>
         <PreviousIcon />
       </Button>
       <Text align="right">

@@ -5,13 +5,19 @@ export const getFeed = state => state.users.feed
 
 export const getPagination = createSelector(getFeed, feed => feed.pagination)
 
+export const getCurrentPage = createSelector(getPagination, pagination => parseInt(pagination.current_page, 10))
+
 export const getSearch = createSelector(getFeed, feed => feed.search)
 
 export const getAllPages = createSelector(getFeed, feed => feed.data)
 
 export const getPage = createSelector(
   getAllPages,
-  (_, { page }) => page,
+  (state, { page } = {}) => (
+    typeof page === "undefined" ?
+      getCurrentPage(state) :
+      page
+    ),
   (data, page) => data[page] || {}
 )
 

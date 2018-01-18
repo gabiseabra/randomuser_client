@@ -5,7 +5,10 @@ import { push } from "react-router-redux"
 import { withRouter } from "react-router-dom"
 import { Feed } from "../../components/users"
 import { load } from "../../redux/modules/users/feed"
-import { getPageUsers } from "../../redux/modules/users/feed/selectors"
+import {
+  getPageUsers,
+  getCurrentPage
+} from "../../redux/modules/users/feed/selectors"
 import Pagination from "./Pagination"
 
 class FeedApp extends Component {
@@ -17,9 +20,8 @@ class FeedApp extends Component {
     if(!next.users || !next.users.length) this.load(next)
   }
 
-  load(props) {
-    console.log(props)
-    this.props.load(1)
+  load({ currentPage }) {
+    this.props.load(currentPage)
   }
 
   onSelect = id => this.props.push(`/u/${id}`)
@@ -30,8 +32,9 @@ class FeedApp extends Component {
   }
 }
 
-const props = (state, { }) => ({
-  users: getPageUsers(state, { page: 1 })
+const props = (state) => ({
+  users: getPageUsers(state),
+  currentPage: getCurrentPage(state)
 })
 
 export default compose(
