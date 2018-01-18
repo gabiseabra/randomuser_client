@@ -6,6 +6,7 @@ import {
   Button,
   IconButton
 } from "material-ui"
+import RefreshIcon from "material-ui-icons/Refresh"
 
 const Container = withStyles({
   root: {
@@ -25,13 +26,17 @@ export default class Form extends Component {
     seed: rng()
   }
 
-  onSubmit = () => this.props.onSubmit(this.state)
+  onSubmit = () => {
+    const { disabled, onSubmit } = this.props
+    if(!disabled) onSubmit(this.state)
+  }
 
   onChange = e => this.setState({ [e.target.name]: e.target.value })
 
   randomize = () => this.setState({ seed: rng() })
 
   render() {
+    const { disabled } = this.props
     const { count, seed } = this.state
 
     return (
@@ -42,13 +47,22 @@ export default class Form extends Component {
           name="seed"
           value={seed}
           onChange={this.onChange} />
+        <IconButton
+          color="primary"
+          onClick={this.randomize}>
+          <RefreshIcon />
+        </IconButton>
         <TextField
           type="number"
           label="Amount"
           name="count"
           value={count}
           onChange={this.onChange} />
-        <Button raised color="primary" onClick={this.onSubmit}>
+        <Button
+          raised
+          color="primary"
+          disabled={disabled}
+          onClick={this.onSubmit}>
           Insert Users
         </Button>
       </Container>
