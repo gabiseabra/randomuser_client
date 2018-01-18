@@ -4,6 +4,7 @@ import { List } from "material-ui"
 import ListItem from "./ListItem"
 
 const Container = styled.div`
+  flex: 1 1 auto;
   overflow-y: auto;
 `
 
