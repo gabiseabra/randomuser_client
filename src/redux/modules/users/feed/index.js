@@ -66,7 +66,7 @@ export default function feedReducer(state = initialState, action) {
     case SUCCESS:
       return {
         ...pageReducer.delegate(state, action),
-        pagination: action.pagination
+        pagination: action.pagination || state.pagination
       }
     case UPDATE:
       return {
