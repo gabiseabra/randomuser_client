@@ -7,6 +7,4 @@ export REACT_APP_API_URL="https://api-dot-${GCP_PROJECT_ID}.appspot.com/api"
 
 yarn run build
 
-gcloud app deploy $TMP_FILE
-
-rm $TMP_FILE
+gcloud app deploy
