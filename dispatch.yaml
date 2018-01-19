@@ -1,0 +1,9 @@
+dispatch:
+  - url: "*/favicon.ico"
+    service: default
+
+  - url: "randomuser-giga.appspot.com/"
+    service: default
+
+  - url: "randomuser-giga.appspot.com/api/*"
+    service: api
