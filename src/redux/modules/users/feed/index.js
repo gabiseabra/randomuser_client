@@ -17,7 +17,10 @@ const initialState = {
   data: {},
   search: {},
   pagination: {
-    current_page: 1
+    pages: 0,
+    entries: 0,
+    current_page: 1,
+    per_page: 15
   }
 }
 
