@@ -1,0 +1,20 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /(.*\.(css|js|json)(|\.map))$
+  static_files: build/\1
+  upload: build/(.*)(|\.map)
+- url: /$
+  static_files: build/index.html
+  upload: build/index.html
+
+skip_files:
+  - node_modules/
+  - src/
+  - public/
+
+env_variables:
+  REACT_APP_API_URL: http://api-dot-randomuser-giga.appspot.com
+

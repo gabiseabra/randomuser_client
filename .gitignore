@@ -22,3 +22,5 @@ yarn-error.log*
 *.log
 
 .env
+
+.app.yaml
